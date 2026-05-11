@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Secret Sauce</title>
+    <style>
+        body {
+            margin: 0;
+            background: #111;
+            color: white;
+            font-family: sans-serif;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* Sidebar Style */
+        nav {
+            width: 220px;
+            background: #222;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            border-right: 2px solid #333;
+        }
+
+        button {
+            padding: 15px;
+            border-radius: 12px;
+            border: none;
+            background: #444;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        button:hover { background: #00acee; }
+        button.active { background: #00acee; box-shadow: 0 0 15px #00acee; }
+
+        /* Rounded Window Container */
+        .viewport {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+        .screen {
+            width: 100%;
+            height: 100%;
+            max-width: 1000px;
+            max-height: 700px;
+            border-radius: 40px; /* Big rounded corners */
+            overflow: hidden;
+            border: 8px solid #333;
+            background: #000;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="menu">
+        <h2 style="text-align: center;">MY ARCADE</h2>
+        <button onclick="play('cldrivemady.html', this)">Drive Mad</button>
+        <button onclick="play('game2.html', this)">Pixel Runner</button>
+        <button onclick="play('game3.html', this)">Brick Breaker</button>
+    </nav>
+
+    <div class="viewport">
+        <div class="screen">
+            <iframe id="arcade-frame" src=""></iframe>
+        </div>
+    </div>
+
+    <script>
+        // UPDATE THIS to your GitHub Pages URL
+        const baseUrl = "https://YOUR_USERNAME.github.io/YOUR_REPO_NAME/";
+
+        function play(fileName, btn) {
+            // Set the iframe source
+            document.getElementById('arcade-frame').src = baseUrl + fileName;
+            
+            // Update UI buttons
+            document.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+        }
+
+        // Auto-load first game
+        window.onload = () => {
+            const firstBtn = document.querySelector('button');
+            play('game1.html', firstBtn);
+        };
+    </script>
+</body>
+</html>
